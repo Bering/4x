@@ -16,11 +16,12 @@ function UIStarsList(list) {
 		context.fillText("Stars", this.x, drawY);
 		drawY += 17;
 
-		for(n = 0; n < this.list.length; n++) {
+		for(var n = 0; n < this.list.length; n++) {
 			if (this.list[n] instanceof Star == false) continue;
 			drawY += 17;
 			context.fillText(this.list[n].name, this.x, drawY);
 		}
+
 	}
 	
 

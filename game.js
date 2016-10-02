@@ -108,14 +108,16 @@ function Game(context) {
 	this.update = function() {
 		this.context.drawImage(backgroundAsset.Image, 0,0);
 
-		for(n = 0; n < this.gameObjects.length; n++) {
-			if (this.gameObjects[n].update)
+		for(var n = 0; n < this.gameObjects.length; n++) {
+			if (this.gameObjects[n].update) {
 				this.gameObjects[n].update(this.currentScreen);
+			}
 		}
-		
-		for(n = 0; n < this.gameObjects.length; n++) {
-			if (this.gameObjects[n].draw)
+
+		for(var n = 0; n < this.gameObjects.length; n++) {
+			if (this.gameObjects[n].draw) {
 				this.gameObjects[n].draw(this.context, this.currentScreen, this.selectedStar);
+			}
 		}
 
 	}
@@ -123,28 +125,33 @@ function Game(context) {
 
 	this.clickListener = function(x, y) {
 
-		for(n = 0; n < this.gameObjects.length; n++) {
-			if (this.gameObjects[n].isClicked(this.currentScreen, x, y)) {
+		for(var n = 0; n < this.gameObjects.length; n++) {
+			if (this.gameObjects[n].isClicked && this.gameObjects[n].isClicked(this.currentScreen, x, y)) {
+				
 				if (this.gameObjects[n] instanceof Star) {
 					switch(this.currentScreen) {
 
 						case SCREENS.STARS:
 							this.selectedStar = this.gameObjects[n];
 							this.changeScreen(SCREENS.PLANETS);
-							break;
+							logThis("Zooming in on " + this.selectedStar.name);
+							return;
 
 						case SCREENS.PLANETS:
 							this.changeScreen(SCREENS.STARS);
-							break;
+							logThis("Zooming out");
+							return;
 					}
 				}
 
-				else if (this.gameObjects[n] instanceof Planet) {
+				else
+				if (this.gameObjects[n] instanceof Planet) {
 					
 					if (this.currentScreen == SCREENS.PLANETS) {
 						this.selectedPlanet = this.gameObjects[n];
 						// TODO: ui update
 						logThis("Selected planet " + this.selectedStar.name + " - " + this.selectedPlanet.name);
+						return;
 					}
 
 				}
