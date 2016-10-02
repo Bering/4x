@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<meta charset="UTF-8">
+	<head>
+		<title>Quick 4x by Philr</title>
+		<script type="text/javascript" src="sprite.js"></script>
+		<script type="text/javascript" src="player.js"></script>
+		<script type="text/javascript" src="star.js"></script>
+		<script type="text/javascript" src="planetType.js"></script>
+		<script type="text/javascript" src="planetSize.js"></script>
+		<script type="text/javascript" src="planet.js"></script>
+		<script type="text/javascript" src="ship.js"></script>
+		<script type="text/javascript" src="game.js"></script>
+		<script type="text/javascript" src="uiStarsList.js"></script>
+		<script>
+			var game = null;
+	
+			var backgroundAsset = new sprite('background.png', 320,320);
+			var starAsset = new sprite('star.png', 16,16);
+			var planetAsset = new sprite('planet.png', 16,16);
+
+			function logThis(text) {
+				var log = document.getElementById("log");
+				for (n=0; n< arguments.length; n++) {
+					log.value += arguments[n];
+				}
+
+				log.value += "\n";
+				log.scrollTop = log.scrollHeight;
+			}
+			
+			window.onload = function() {
+				logThis( 'Game starting...' );
+				
+				canvas = document.getElementById( "canvas" );
+				context = canvas.getContext( "2d" );
+
+				game = new Game(context);
+
+				canvas.addEventListener('click', function(event) {
+	    			var x = event.pageX - this.offsetLeft;
+	        		var y = event.pageY - this.offsetTop;
+	        		game.handleClick(x, y);
+	        	});
+
+				game.createRandomUniverse();
+
+				game.uis.push(new UIStarsList(game.stars));
+
+				game.changeScreen(SCREENS.STARS); // Skip menu
+			}
+
+
+		</script>
+		<style>
+			.left { float: left; }
+			#log { width: 320px; height: 320px; font-size: x-small;}
+			#controls button { width: 100%; }
+			#controls select { width: 100%; }
+		</style>
+	<head>
+	<body>
+		<div>
+			<div id="topBar">
+				Score: <input id="Score" type="number" value="0" readonly />
+			</div>
+			<div class="left">
+				<canvas id="canvas" width="640" height="480" style="border: solid black 1px;"></canvas>
+			</div>
+			<div class="left">
+				<div>
+					<textarea id="log" readonly></textarea>
+				</div>
+				<button onclick="game.Colonize(selectedPlanet)">Colonize</button>
+				<button onclick="game.nextTurn();">Next Turn</button>
+			</div>
+		</div>
+	</body>
+</html>
