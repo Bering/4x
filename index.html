@@ -36,12 +36,11 @@
 				context = canvas.getContext( "2d" );
 
 				game = new Game(context);
-
 				canvas.addEventListener('click', function(event) {
-	    			var x = event.pageX - this.offsetLeft;
-	        		var y = event.pageY - this.offsetTop;
-	        		game.handleClick(x, y);
-	        	});
+					var x = event.pageX - this.offsetLeft;
+					var y = event.pageY - this.offsetTop;
+					game.clickListener(x, y);
+				});
 
 				game.createRandomUniverse();
 				game.setupUI();
