@@ -77,6 +77,10 @@ function Game(context) {
 	}
 
 
+	this.setupUI = function() {
+		this.gameObjects.push(new UIStarsList(this.gameObjects));
+	}
+
 	this.changeScreen = function(newScreen) {
 		this.currentScreen = newScreen;
 		this.update();

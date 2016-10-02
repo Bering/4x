@@ -44,9 +44,7 @@
 	        	});
 
 				game.createRandomUniverse();
-
-				game.uis.push(new UIStarsList(game.stars));
-
+				game.setupUI();
 				game.changeScreen(SCREENS.STARS); // Skip menu
 			}
 
