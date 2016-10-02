@@ -28,13 +28,7 @@ function Game(context) {
 	this.players = new Array();
 	this.players[0] = new Player("Player One");
 
-	this.stars = new Array();
-
-	this.planets = new Array();
-
-	this.ships = new Array();
-
-	this.uis = new Array();
+	this.gameObjects = new Array();
 
 
 	this.rnd = function(min,max) {
@@ -45,11 +39,12 @@ function Game(context) {
 	this.createRandomUniverse = function() {
 		var nbStars = this.rnd(2,10);
 		for(s = 0; s < nbStars; s++) {
-			this.stars.push(this.createRandomStar());
+			var star = this.createRandomStar();
+			this.gameObjects.push(star);
 			
 			var nbPlanets = this.rnd(1,10);
 			for(p = 0; p < nbPlanets; p++) {
-				this.planets.push(this.createRandomPlanet(this.stars[s]));
+				this.gameObjects.push(this.createRandomPlanet(star));
 			}
 		}
 	}
@@ -90,48 +85,45 @@ function Game(context) {
 	this.update = function() {
 		this.context.drawImage(backgroundAsset.Image, 0,0);
 
-		for(n = 0; n < this.stars.length; n++) {
-			if (this.currentScreen == SCREENS.PLANETS && this.stars[n] != this.selectedStar) continue;
-			this.stars[n].draw(this.context, this.currentScreen);
-		}
-
-		if (this.currentScreen == SCREENS.PLANETS) {
-			for(n = 0; n < this.planets.length; n++) {
-				if (this.currentScreen != SCREENS.PLANETS || this.planets[n].star != this.selectedStar) continue;
-				this.planets[n].draw(this.context, this.currentScreen);
-			}
+		for(n = 0; n < this.gameObjects.length; n++) {
+			if (this.gameObjects[n].update)
+				this.gameObjects[n].update(this.currentScreen);
 		}
 		
-		for(n=0; n < this.uis.length; n++) {
-			this.uis[n].draw(this.context, this.currentScreen);
+		for(n = 0; n < this.gameObjects.length; n++) {
+			if (this.gameObjects[n].draw)
+				this.gameObjects[n].draw(this.context, this.currentScreen, this.selectedStar);
 		}
 
 	}
 
 
-	this.handleClick = function(x, y) {
+	this.clickListener = function(x, y) {
 
-		for(n = 0; n < this.stars.length; n++) {
-			if (this.stars[n].isClicked(this.currentScreen, x, y)) {
-				switch(this.currentScreen) {
+		for(n = 0; n < this.gameObjects.length; n++) {
+			if (this.gameObjects[n].isClicked(this.currentScreen, x, y)) {
+				if (this.gameObjects[n] instanceof Star) {
+					switch(this.currentScreen) {
 
-					case SCREENS.STARS:
-						this.selectedStar = this.stars[n];
-						this.changeScreen(SCREENS.PLANETS);
-						break;
+						case SCREENS.STARS:
+							this.selectedStar = this.gameObjects[n];
+							this.changeScreen(SCREENS.PLANETS);
+							break;
 
-					case SCREENS.PLANETS:
-						this.changeScreen(SCREENS.STARS);
-						break;
+						case SCREENS.PLANETS:
+							this.changeScreen(SCREENS.STARS);
+							break;
+					}
 				}
-			}
-		}
 
-		for(n = 0; n < this.planets.length; n++) {
-			if (this.planets[n].isClicked(this.currentScreen, x, y)) {
-				if (this.currentScreen == SCREENS.PLANETS) {
-					this.selectedPlanet = this.planets[n];
-					// TODO: ui update
+				else if (this.gameObjects[n] instanceof Planet) {
+					
+					if (this.currentScreen == SCREENS.PLANETS) {
+						this.selectedPlanet = this.gameObjects[n];
+						// TODO: ui update
+						logThis("Selected planet " + this.selectedStar.name + " - " + this.selectedPlanet.name);
+					}
+
 				}
 			}
 		}
