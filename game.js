@@ -7,6 +7,7 @@ SCREENS = {
 function Game(context) {
 
 	this.context = context;
+	
 	this.currentScreen = SCREENS.MENU;
 	this.selectedStar = null;
 	this.selectedPlanet = null;
@@ -76,8 +77,26 @@ function Game(context) {
 	}
 
 
-	this.setupUI = function() {
+	this.setupUI = function(canvas) {
+		var that = this;
+		canvas.addEventListener('click', function(event) {
+			var x = event.pageX - this.offsetLeft;
+			var y = event.pageY - this.offsetTop;
+			that.clickListener(x, y);
+		});
+	}
+
+
+	this.newGame = function() {
+		this.selectedStar = null;
+		this.selectedPlanet = null;
+		this.gameObjects = new Array();
+
 		this.gameObjects.push(new UIStarsList(this.gameObjects));
+
+		this.createRandomUniverse();
+		
+		this.changeScreen(SCREENS.STARS);
 	}
 
 	this.changeScreen = function(newScreen) {
