@@ -94,6 +94,9 @@ function Game(context) {
 
 		this.gameObjects.push(new UIStarsList(this.gameObjects));
 
+		this.selectedPlanetUI = new UISelectedPlanet();
+		this.gameObjects.push(this.selectedPlanetUI);
+
 		this.createRandomUniverse();
 		
 		this.changeScreen(SCREENS.STARS);
@@ -149,8 +152,7 @@ function Game(context) {
 					
 					if (this.currentScreen == SCREENS.PLANETS) {
 						this.selectedPlanet = this.gameObjects[n];
-						// TODO: ui update
-						logThis("Selected planet " + this.selectedStar.name + " - " + this.selectedPlanet.name);
+						this.selectedPlanetUI.selectPlanet(this.context, this.selectedStar, this.selectedPlanet);
 						return;
 					}
 
