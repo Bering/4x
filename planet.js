@@ -59,10 +59,11 @@ function Planet (name, type, size) {
 	}
 
 
-	this.draw = function(context, screen) {
+	this.draw = function(context, screen, selectedStar) {
 		switch(screen) {
 			
 			case SCREENS.PLANETS:
+				if (this.star != selectedStar) return;
 				context.drawImage(planetAsset.Image, this.x-8, this.y-8);
 				context.fillStyle = "#ffffff";
 				context.fillText(this.name, this.x - 12, this.y + 17);

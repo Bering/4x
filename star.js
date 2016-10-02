@@ -6,7 +6,7 @@ function Star (name) {
 	this.y = 0;
 
 
-	this.draw = function(context, screen) {
+	this.draw = function(context, screen, selectedStar) {
 		switch(screen) {
 			
 			case SCREENS.STARS:
@@ -16,6 +16,7 @@ function Star (name) {
 				break;
 
 			case SCREENS.PLANETS:
+				if (this != selectedStar) return;
 				context.drawImage(starAsset.Image, 160 - 8, 160 - 8);  // 320 / 2 - 8
 				context.fillStyle = "#ffffff";
 				context.fillText( this.name, 160 - 12, 160 + 17 );
