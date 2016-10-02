@@ -38,15 +38,19 @@ function Game(context) {
 
 	this.createRandomUniverse = function() {
 		var nbStars = this.rnd(2,10);
+		var nbPlanets = 0;
 		for(s = 0; s < nbStars; s++) {
 			var star = this.createRandomStar();
 			this.gameObjects.push(star);
 			
-			var nbPlanets = this.rnd(1,10);
-			for(p = 0; p < nbPlanets; p++) {
+			var nbPlanetsInOrbit = this.rnd(1,10);
+			nbPlanets += nbPlanetsInOrbit;
+			for(p = 0; p < nbPlanetsInOrbit; p++) {
 				this.gameObjects.push(this.createRandomPlanet(star));
 			}
 		}
+
+		console.log("Created " + nbStars + " stars and " + nbPlanets + " planets.");
 	}
 	this.createRandomStar = function() {
 		var name = String.fromCharCode(this.rnd(65, 90))+this.rnd(1,9)+this.rnd(1,9)+this.rnd(1,9);
