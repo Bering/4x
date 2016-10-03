@@ -97,8 +97,6 @@ function Game(context) {
 					else
 						if (s.x < 288) s.x += 32;
 						else s.x -= 64;
-
-					console.log("Nudged " + s.name + " to prevent overlap with " + o.name);
 				}
 			}
 		}
@@ -120,8 +118,6 @@ function Game(context) {
 					else
 						if (p.x < 288) p.x += 32;
 						else p.x -= 64;
-
-					console.log("Nudged " + p.name + " to prevent overlap with " + o.name);
 				}
 			}
 		}
