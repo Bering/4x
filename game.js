@@ -51,6 +51,11 @@ function Game(context) {
 			}
 		}
 
+		this.scatterStars();
+		this.scatterStars();
+		this.scatterPlanets();
+		this.scatterPlanets();
+
 		console.log("Created " + nbStars + " stars and " + nbPlanets + " planets.");
 	}
 	this.createRandomStar = function() {
@@ -74,6 +79,52 @@ function Game(context) {
 		planet.y = this.rnd(8, 312);
 		
 		return planet;
+	}
+	this.scatterStars = function() {
+		for(var n = 0; n < this.gameObjects.length; n++) {
+			var s = this.gameObjects[n];
+			if (s instanceof Star == false) continue;
+
+			for(var i = 0; i < this.gameObjects.length; i++) {
+				if (i == n) continue;
+				var o = this.gameObjects[i];
+				if (o instanceof Star == false) continue;
+
+				if (Math.abs(s.x - o.x) + Math.abs(s.y - o.y) < 32) {
+					if (s.x < o.x)
+						if (s.x > 32) s.x -= 32;
+						else s.x += 64;
+					else
+						if (s.x < 288) s.x += 32;
+						else s.x -= 64;
+
+					console.log("Nudged " + s.name + " to prevent overlap with " + o.name);
+				}
+			}
+		}
+	}
+	this.scatterPlanets = function() {
+		for(var n = 0; n < this.gameObjects.length; n++) {
+			var p = this.gameObjects[n];
+			if (p instanceof Planet == false) continue;
+
+			for(var i = 0; i < this.gameObjects.length; i++) {
+				if (i == n) continue;
+				var o = this.gameObjects[i];
+				if (o instanceof Planet == false) continue;
+
+				if (Math.abs(p.x - o.x) + Math.abs(p.y - o.y) < 32) {
+					if (p.x < o.x)
+						if (p.x > 32) p.x -= 32;
+						else p.x += 64;
+					else
+						if (p.x < 288) p.x += 32;
+						else p.x -= 64;
+
+					console.log("Nudged " + p.name + " to prevent overlap with " + o.name);
+				}
+			}
+		}
 	}
 
 
