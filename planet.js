@@ -72,10 +72,10 @@ function Planet (name, type, size) {
 			case SCREENS.PLANETS:
 				if (this.star != selectedStar) return;
 				context.drawImage(planetAsset.Image, this.x-8, this.y-8);
-				context.fillStyle = "#ffffff";
 				if (this.y < 304) {
-					var w = context.measureText(this.name);
-					context.fillText(this.name, this.x - (w.width/2), this.y + 17);
+					context.fillStyle = "#ffffff";
+					context.textAlign = "center";
+					context.fillText(this.name, this.x, this.y + 17);
 				}
 				break;
 		}

@@ -10,6 +10,8 @@ function UISelectedPlanet() {
 		var drawY = 17;
 
 		context.fillStyle = "#ffffff";
+        context.textAlign = "left";
+        
 		context.fillText("Selected Planet", this.x, drawY);
 		drawY += 17;
 		context.fillText("--------------------------", this.x, drawY);

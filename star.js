@@ -12,14 +12,17 @@ function Star (name) {
 			case SCREENS.STARS:
 				context.drawImage(starAsset.Image, this.x - 8, this.y - 8);
 				context.fillStyle = "#ffffff";
-				if (this.y < 304) context.fillText( this.name, this.x - 12, this.y + 17 );
+				context.textAlign = "center";
+				if (this.y < 304) context.fillText( this.name, this.x, this.y + 17 );
 				break;
 
 			case SCREENS.PLANETS:
 				if (this != selectedStar) break;
+				//context.scale(2,2);
 				context.drawImage(starAsset.Image, 160 - 8, 160 - 8);  // 320 / 2 - 8
 				context.fillStyle = "#ffffff";
-				context.fillText( this.name, 160 - 12, 160 + 17 );
+				context.textAlign = "center";
+				context.fillText( this.name, 160, 160 + 17 );
 				break;
 		}
 	}

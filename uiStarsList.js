@@ -13,6 +13,7 @@ function UIStarsList(list) {
 		var drawY = 0;
 
 		context.fillStyle = "#ffffff";
+		context.textAlign = "left";
 		context.fillText("Stars", this.x, drawY);
 		drawY += 17;
 
