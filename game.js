@@ -40,13 +40,13 @@ function Game(context) {
 	this.createRandomUniverse = function() {
 		var nbStars = this.rnd(2,10);
 		var nbPlanets = 0;
-		for(s = 0; s < nbStars; s++) {
+		for(var s = 0; s < nbStars; s++) {
 			var star = this.createRandomStar();
 			this.gameObjects.push(star);
 			
 			var nbPlanetsInOrbit = this.rnd(1,10);
 			nbPlanets += nbPlanetsInOrbit;
-			for(p = 0; p < nbPlanetsInOrbit; p++) {
+			for(var p = 0; p < nbPlanetsInOrbit; p++) {
 				this.gameObjects.push(this.createRandomPlanet(star));
 			}
 		}
