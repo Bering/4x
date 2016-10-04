@@ -27,7 +27,7 @@ function Game(context) {
 	this.planetSizes[PlanetSizesNames.HUGE]     = new PlanetSize("Huge",   100000);
 
 	this.players = new Array();
-	this.players[0] = new Player("Player One");
+	this.players.push(new Player("Player One"));
 
 	this.gameObjects = new Array();
 
@@ -124,7 +124,7 @@ function Game(context) {
 	}
 
 
-	this.setupUI = function(canvas) {
+	this.SetupUI = function(canvas) {
 		var that = this;
 		canvas.addEventListener('click', function(event) {
 			var x = event.pageX - this.offsetLeft;
@@ -134,7 +134,7 @@ function Game(context) {
 	}
 
 
-	this.newGame = function() {
+	this.NewGame = function() {
 		this.selectedStar = null;
 		this.selectedPlanet = null;
 		this.gameObjects = new Array();
@@ -148,6 +148,7 @@ function Game(context) {
 		
 		this.changeScreen(SCREENS.STARS);
 	}
+
 
 	this.changeScreen = function(newScreen) {
 		this.currentScreen = newScreen;
@@ -208,5 +209,28 @@ function Game(context) {
 		}
 
 	}
+
+
+	this.Colonize = function() {
+		if (!this.selectedPlanet) {
+			alert("You must select a planet first");
+		}
+
+		this.players[0].colonize(this.selectedPlanet);
+		this.update();
+	}
+
+
+	this.NextTurn = function() {
+		for(var n=0; n < this.gameObjects.length; n++) {
+			var p = this.gameObjects[n];
+			if (p instanceof Planet) {
+				p.nextTurn();
+			}
+		}
+
+		this.update();
+	}
+
 
 }

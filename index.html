@@ -37,10 +37,10 @@
 				context = canvas.getContext( "2d" );
 
 				game = new Game(context);
-				game.setupUI(canvas);
+				game.SetupUI(canvas);
 
 				// Skip menu
-				game.newGame();
+				game.NewGame();
 			}
 
 
@@ -64,8 +64,8 @@
 				<div>
 					<textarea id="log" readonly></textarea>
 				</div>
-				<button onclick="game.Colonize(selectedPlanet)">Colonize</button>
-				<button onclick="game.nextTurn();">Next Turn</button>
+				<button onclick="game.Colonize()">Colonize</button>
+				<button onclick="game.NextTurn();">Next Turn</button>
 			</div>
 		</div>
 	</body>

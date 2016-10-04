@@ -54,18 +54,6 @@ function Planet (name, type, size) {
 	this.scienceIncrement    = 0;
 
 
-	this.update = function() {
-
-		this.population += this.populationIncrement;
-		this.industryLevel += this.industryIncrement;
-		this.militaryLevel += this.militaryIncrement;
-		this.luxuryLevel += this.luxuryIncrement;
-		this.scienceLevel += this.scienceIncrement;
-
-		this.computeIncrements();
-	}
-
-
 	this.draw = function(context, screen, selectedStar) {
 		switch(screen) {
 			
@@ -96,6 +84,18 @@ function Planet (name, type, size) {
 		}
 
 		return false;
+	}
+
+
+	this.nextTurn = function() {
+
+		this.population += this.populationIncrement;
+		this.industryLevel += this.industryIncrement;
+		this.militaryLevel += this.militaryIncrement;
+		this.luxuryLevel += this.luxuryIncrement;
+		this.scienceLevel += this.scienceIncrement;
+
+		this.computeIncrements();
 	}
 
 
