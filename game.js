@@ -202,7 +202,7 @@ function Game(context) {
 					
 					if (this.currentScreen == SCREENS.PLANETS) {
 						this.selectedPlanet = this.gameObjects[n];
-						this.selectedPlanetUI.selectPlanet(this.context, this.selectedStar, this.selectedPlanet);
+						selectPlanet(this.selectedPlanet);
 						return;
 					}
 

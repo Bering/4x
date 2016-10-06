@@ -43,11 +43,20 @@
 				game.NewGame();
 			}
 
-
+			function selectPlanet(planet) {
+				document.getElementById("planetName").innerHTML = planet.star.name + " - " + planet.name;
+				document.getElementById("planetType").innerHTML = planet.type.name;
+				document.getElementById("planetSize").innerHTML = planet.size.name;
+				document.getElementById("planetPopulation").innerHTML = planet.population + " (+"+ planet.populationRate + ")";
+				document.getElementById("planetIndustry").innerHTML = planet.industryLevel + " (+"+ planet.industryRate + ")";
+				document.getElementById("planetScience").innerHTML = planet.scienceLevel + " (+"+ planet.scienceRate + ")";
+			}
 		</script>
 		<style>
+			label { font-weight: bold; display:inline-block; width: 100px; }
 			.left { float: left; }
-			#log { width: 320px; height: 320px; font-size: x-small;}
+			#log { width: 320px; height: 100px; font-size: x-small;}
+			#planetSelection { margin-left: 10px; }
 			#controls button { width: 100%; }
 			#controls select { width: 100%; }
 		</style>
@@ -58,14 +67,32 @@
 				Score: <input id="Score" type="number" value="0" readonly />
 			</div>
 			<div class="left">
-				<canvas id="canvas" width="640" height="480" style="border: solid black 1px;"></canvas>
-			</div>
-			<div class="left">
+				<canvas id="canvas" width="320" height="320" style="border: solid black 1px;"></canvas>
 				<div>
 					<textarea id="log" readonly></textarea>
 				</div>
-				<button onclick="game.Colonize()">Colonize</button>
-				<button onclick="game.NextTurn();">Next Turn</button>
+			</div>
+			<div class="left">
+				<div id="planetSelection">
+					<h2><span id="planetName"></span></h2>
+					<p><label>Type:</label> <span id="planetType"></span></p>
+					<p><label>Size:</label> <span id="planetSize"></span></p>
+					<p><label>Population:</label> <span id="planetPopulation"></span></p>
+					<p><label>Industry:</label> <span id="planetIndustry"></span></p>
+					<p><label>Science:</label> <span id="planetScience"></span></p>
+					<p><label>Production:</label> <select id="planetProduction">
+						<option>Improve Population Rate</option>
+						<option>Improve Industry Rate</option>
+						<option>Improve Science Rate</option>
+						<option>Build Scout</option>
+						<option>Build Frigate</option>
+						<option>Build Colony Ship</option>
+					</select></p>
+				</div>
+				<div>
+					<button onclick="game.Colonize()">Colonize</button>
+					<button onclick="game.NextTurn();">Next Turn</button>
+				</div>
 			</div>
 		</div>
 	</body>
