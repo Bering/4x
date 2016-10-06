@@ -13,11 +13,13 @@ function Game(context) {
 	this.selectedPlanet = null;
 
 	this.planetTypes = new Array();
-	this.planetTypes[PlanetTypesNames.BAREN]    = new PlanetType("Baren",  0, 0, 1, 0, 1);
-	this.planetTypes[PlanetTypesNames.ARID]     = new PlanetType("Arid",   0, 0.5, 1, 1, 1);
-	this.planetTypes[PlanetTypesNames.TERRAN]   = new PlanetType("Terran", 1, 1, 1, 1, 1);
-	this.planetTypes[PlanetTypesNames.RICH]     = new PlanetType("Rich",   2, 1, 1, 1, 1);
-	this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("Gaïa",   4, 1, 1, 1, 1);
+	this.planetTypes[PlanetTypesNames.BAREN]    = new PlanetType("Baren",  0,   0,   1);
+	this.planetTypes[PlanetTypesNames.ARID]     = new PlanetType("Arid",   0,   0.5, 1);
+	this.planetTypes[PlanetTypesNames.TERRAN]   = new PlanetType("Terran", 1,   1,   1);
+	this.planetTypes[PlanetTypesNames.RICH]     = new PlanetType("Rich",   1,   2,   1);
+	this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("Gaïa",   2,   1,   1);
+	//this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("Asteroid",0,   1,   1);
+	//this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("GasGiant",0,   2,   2);
 
 	this.planetSizes = new Array();
 	this.planetSizes[PlanetSizesNames.TINY]     = new PlanetSize("Tiny",   10);

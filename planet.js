@@ -28,30 +28,12 @@ function Planet (name, type, size) {
 	// current level
 	this.population      = 0;
 	this.industryLevel   = 0;
-	this.militaryLevel   = 0;
-	this.luxuryLevel     = 0;
 	this.scienceLevel    = 0;
 
-	// how much to increment next turn, pre bonuses
+	// how much to increment next turn. Represents improvements built.
 	this.populationRate  = 0;
 	this.industryRate    = 0;
-	this.militaryRate    = 0;
-	this.luxuryRate      = 0;
 	this.scienceRate     = 0;
-
-	// how much importance the player wants to put on each level (total of all 5 = 1)
-	this.populationFocus = 0;
-	this.industryFocus   = 0;
-	this.militaryFocus   = 0;
-	this.luxuryFocus     = 0;
-	this.scienceFocus    = 0;
-
-	// how much to increment next turn, effective, with planetary bonuses and focus
-	this.populationIncrement = 0;
-	this.industryIncrement   = 0;
-	this.militaryIncrement   = 0;
-	this.luxuryIncrement     = 0;
-	this.scienceIncrement    = 0;
 
 
 	this.draw = function(context, screen, selectedStar) {
@@ -89,38 +71,16 @@ function Planet (name, type, size) {
 
 	this.nextTurn = function() {
 
-		this.population += this.populationIncrement;
-		this.industryLevel += this.industryIncrement;
-		this.militaryLevel += this.militaryIncrement;
-		this.luxuryLevel += this.luxuryIncrement;
-		this.scienceLevel += this.scienceIncrement;
+		this.population += this.populationRate;
+		this.industryLevel += this.industryRate;
+		this.scienceLevel += this.scienceRate;
 
-		this.computeIncrements();
-	}
-
-
-	this.computeIncrements = function() {
-		this.populationIncrement = ((this.populationRate * this.type.populationBonus) + this.luxuryRate) * this.populationFocus;
-		this.industryIncrement   = ((this.industryRate * this.type.industryBonus) + this.scienceRate) * this.industryFocus;
-		this.militaryIncrement   = ((this.militaryRate * this.type.militaryBonus) + this.scienceRate) * this.militaryFocus;
-		this.luxuryIncrement     = (this.luxuryRate * this.type.luxuryBonus) * this.luxuryFocus;
-		this.scienceIncrement    = (this.scienceRate * this.type.scienceBonus) * this.scienceFocus;
-
-		if (this.population + this.populationIncrement >= this.size.maxPop) {
-			this.populationIncrement = this.size.maxPop - this.population;
+		if (this.population >= this.size.maxPop) {
+			this.population = this.size.maxPop;
 			this.populationRate = 0;
+			logThis(this.star.name + " - " + this.name + " has reached maximum population.");
 		}
 	}
 
-
-	this.setFocus = function(populationFocus, industryFocus, militaryFocus, luxuryFocus, scienceFocus) {
-		this.populationFocus = populationFocus;
-		this.industryFocus = industryFocus;
-		this.militaryFocus = militaryFocus;
-		this.luxuryFocus = luxuryFocus;
-		this.scienceFocus = scienceFocus;
-
-		this.computeIncrements();
-	}
 
 }

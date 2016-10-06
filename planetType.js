@@ -1,9 +1,7 @@
 
-function PlanetType(name, pb, ib, mb, lb, sb) {
+function PlanetType(name, pb, ib, sb) {
 	this.name = name;
 	this.populationBonus = pb;
 	this.industryBonus = ib;
-	this.militaryBonus = mb;
-	this.luxuryBonus = lb;
 	this.scienceBonus = sb;
 }
