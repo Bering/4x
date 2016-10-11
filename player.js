@@ -13,5 +13,8 @@ function Player(name) {
 		planet.populationRate = planet.type.populationBonus;
 		planet.industryRate = planet.type.industryBonus;
 		planet.scienceRate = planet.type.scienceBonus;
+
+		planet.productionOption = new ProductionOptionPopulation();
+		planet.productionOption.select(planet);
 	}
 }

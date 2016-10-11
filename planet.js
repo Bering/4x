@@ -1,18 +1,3 @@
-PlanetTypesNames = {
-	BAREN : 0,
-	ARID : 1,
-	TERRAN : 2,
-	RICH : 3,
-	GAIA : 4,
-}
-
-PlanetSizesNames = {
-	TINY : 0,
-	SMALL : 1,
-	MEDIUM : 2,
-	LARGE : 3,
-	HUGE : 4
-}
 
 function Planet (name, type, size) {
 
@@ -34,6 +19,9 @@ function Planet (name, type, size) {
 	this.populationRate  = 0;
 	this.industryRate    = 0;
 	this.scienceRate     = 0;
+
+	this.productionOption = null;
+	this.productionProgress = 0;
 
 
 	this.draw = function(context, screen, selectedStar) {
@@ -79,6 +67,10 @@ function Planet (name, type, size) {
 			this.population = this.size.maxPop;
 			this.populationRate = 0;
 			logThis(this.star.name + " - " + this.name + " has reached maximum population.");
+		}
+
+		if (this.productionOption) {
+			this.productionOption.nextTurn(this);
 		}
 	}
 
