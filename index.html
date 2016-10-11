@@ -51,7 +51,17 @@
 				document.getElementById("planetPopulation").innerHTML = planet.population + " (+"+ planet.populationRate + ")";
 				document.getElementById("planetIndustry").innerHTML = planet.industryLevel + " (+"+ planet.industryRate + ")";
 				document.getElementById("planetScience").innerHTML = planet.scienceLevel + " (+"+ planet.scienceRate + ")";
+
+				var pp = document.getElementById("planetProduction");
+				if (planet.productionOption == null) {
+					pp.value = 0;
+					pp.disabled = true;
+				} else {
+					pp.value = planet.productionOption.index;
+					pp.disabled = false;
+				}
 			}
+
 		</script>
 		<style>
 			label { font-weight: bold; display:inline-block; width: 100px; }
@@ -81,13 +91,14 @@
 					<p><label>Population:</label> <span id="planetPopulation"></span></p>
 					<p><label>Industry:</label> <span id="planetIndustry"></span></p>
 					<p><label>Science:</label> <span id="planetScience"></span></p>
-					<p><label>Production:</label> <select id="planetProduction">
-						<option>Improve Population Rate</option>
-						<option>Improve Industry Rate</option>
-						<option>Improve Science Rate</option>
-						<option>Build Scout</option>
-						<option>Build Frigate</option>
-						<option>Build Colony Ship</option>
+					<p><label>Production:</label> <select id="planetProduction" onchange="game.ChangeProduction(this.value);" disabled>
+						<option value="0">-- Not colonized --</option>
+						<option value="1">Improve Population Rate</option>
+						<option value="2">Improve Industry Rate</option>
+						<option value="3">Improve Science Rate</option>
+						<option value="4">Build Scout</option>
+						<option value="5">Build Frigate</option>
+						<option value="6">Build Colony Ship</option>
 					</select></p>
 				</div>
 				<div>

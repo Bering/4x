@@ -1,71 +1,18 @@
-ProductionOptionsNames = {
-	POPULATION : 0,
-	INDUSTRY : 1,
-	SCIENCE : 2,
-	SCOUT : 3,
-	FRIGATE : 4
-}
-
-function ProductionOptionPopulation() {
-	this.name = "Improve Population rate";
-
-
-	this.select = function(planet) {
-		planet.productionProgress = 0;
-	}
-
-
-	this.nextTurn = function(planet) {
-		planet.populationRate ++;
-	}
+ProductionOptions = {
+	POPULATION : 1,
+	INDUSTRY : 2,
+	SCIENCE : 3,
+	SCOUT : 4,
+	FRIGATE : 5,
+	COLONY : 6
 }
 
 
-function ProductionOptionIndustry() {
-	this.name = "Improve Industry rate";
+function ProductionOption(index, name, cost, effect) {
 
-
-	this.select = function(planet) {
-		planet.productionProgress = 0;
-	}
-
-
-	this.nextTurn = function(planet) {
-		planet.industryRate ++;
-	}
-}
-
-
-function ProductionOptionScience() {
-	this.name = "Improve Science rate";
-
-
-	this.select = function(planet) {
-		planet.productionProgress = 0;
-	}
-
-
-	this.nextTurn = function(planet) {
-		planet.scienceRate ++;
-	}
-}
-
-
-function ProductionOptionScout() {
-	this.name = "Build Scout";
-
-
-	this.select = function(planet) {
-		planet.productionProgress = 0;
-	}
-
-
-	this.nextTurn = function(planet) {
-		planet.productionProgress += planet.productionRate;
-		if (planet.productionProgress >= 10) {
-			planet.productionProgress = 0;
-			planet.scouts++;
-		}
-	}
+	this.index = index;
+	this.name = name;
+	this.cost = cost;
+	this.effect = effect;
 
 }

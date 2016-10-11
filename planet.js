@@ -23,6 +23,10 @@ function Planet (name, type, size) {
 	this.productionOption = null;
 	this.productionProgress = 0;
 
+	this.scouts = 0;
+	this.frigates = 0;
+	this.colonyShips = 0;
+
 
 	this.draw = function(context, screen, selectedStar) {
 		switch(screen) {
@@ -70,8 +74,14 @@ function Planet (name, type, size) {
 		}
 
 		if (this.productionOption) {
-			this.productionOption.nextTurn(this);
+			this.productionProgress += this.productionRate;
+			if (this.productionProgress >= this.productionOption.cost) {
+				this.productionProgress = 0;
+				this.productionOption.effect(this);
+				logThis(this.star.name + " - " + this.name + " finished production of " + this.productionOption.name);
+			}
 		}
+
 	}
 
 

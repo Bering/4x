@@ -13,13 +13,13 @@ function Game(context) {
 	this.selectedPlanet = null;
 
 	this.planetTypes = new Array();
-	this.planetTypes[PlanetTypesNames.BAREN]    = new PlanetType("Baren",  0,   0,   1);
-	this.planetTypes[PlanetTypesNames.ARID]     = new PlanetType("Arid",   0,   0.5, 1);
-	this.planetTypes[PlanetTypesNames.TERRAN]   = new PlanetType("Terran", 1,   1,   1);
-	this.planetTypes[PlanetTypesNames.RICH]     = new PlanetType("Rich",   1,   2,   1);
-	this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("Gaïa",   2,   1,   1);
-	//this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("Asteroid",0,   1,   1);
-	//this.planetTypes[PlanetTypesNames.GAIA]     = new PlanetType("GasGiant",0,   2,   2);
+	this.planetTypes[PlanetTypesNames.BAREN]      = new PlanetType("Baren",  0,   0,   0);
+	this.planetTypes[PlanetTypesNames.ARID]       = new PlanetType("Arid",   0,   0,   0);
+	this.planetTypes[PlanetTypesNames.TERRAN]     = new PlanetType("Terran", 1,   1,   1);
+	this.planetTypes[PlanetTypesNames.RICH]       = new PlanetType("Rich",   1,   2,   1);
+	this.planetTypes[PlanetTypesNames.GAIA]       = new PlanetType("Gaïa",   2,   1,   1);
+	//this.planetTypes[PlanetTypesNames.ASTEROID] = new PlanetType("Asteroid", 0,   1,   1);
+	//this.planetTypes[PlanetTypesNames.GASGIANT] = new PlanetType("GasGiant", 0,   2,   2);
 
 	this.planetSizes = new Array();
 	this.planetSizes[PlanetSizesNames.TINY]     = new PlanetSize("Tiny",   10);
@@ -27,6 +27,14 @@ function Game(context) {
 	this.planetSizes[PlanetSizesNames.MEDIUM]   = new PlanetSize("Medium", 1000);
 	this.planetSizes[PlanetSizesNames.LARGE]    = new PlanetSize("Large",  10000);
 	this.planetSizes[PlanetSizesNames.HUGE]     = new PlanetSize("Huge",   100000);
+
+	this.productionOptions = new Array();
+	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing", function(planet) { planet.populationRate++; });
+	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY, "Factory", function(planet) { planet.industryRate++; });
+	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE, "Laboratory", function(planet) { planet.scienceRate++; });
+	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT, "Scout Ship", function(planet) { planet.scouts++; });
+	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE, "Frigate", function(planet) { planet.frigates++; });
+	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY, "Colony Ship", function(planet) { planet.colonyShip++; });
 
 	this.players = new Array();
 	this.players.push(new Player("Player One"));
@@ -219,6 +227,8 @@ function Game(context) {
 		}
 
 		this.players[0].colonize(this.selectedPlanet);
+		this.changeProduction(ProductionOptions.POPULATION);
+
 		this.update();
 	}
 
@@ -234,5 +244,12 @@ function Game(context) {
 		this.update();
 	}
 
+
+	this.ChangeProduction = function(index) {
+
+		this.selectedPlanet.productionOption = this.ProductionOptions[index];
+		this.selectedPlanet.productionProgress = 0;
+
+	}
 
 }
