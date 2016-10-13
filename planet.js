@@ -73,8 +73,8 @@ function Planet (name, type, size) {
 			logThis(this.star.name + " - " + this.name + " has reached maximum population.");
 		}
 
-		if (this.productionOption) {
-			this.productionProgress += this.productionRate;
+		if (this.productionOption != null) {
+			this.productionProgress += this.industryLevel;
 			if (this.productionProgress >= this.productionOption.cost) {
 				this.productionProgress = 0;
 				this.productionOption.effect(this);
@@ -84,5 +84,10 @@ function Planet (name, type, size) {
 
 	}
 
+
+	this.ChangeProduction = function(newProduction) {
+		this.productionOption = newProduction;
+		this.productionProgress = 0;
+	}
 
 }

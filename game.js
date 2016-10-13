@@ -29,12 +29,12 @@ function Game(context) {
 	this.planetSizes[PlanetSizesNames.HUGE]     = new PlanetSize("Huge",   100000);
 
 	this.productionOptions = new Array();
-	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing", function(planet) { planet.populationRate++; });
-	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY, "Factory", function(planet) { planet.industryRate++; });
-	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE, "Laboratory", function(planet) { planet.scienceRate++; });
-	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT, "Scout Ship", function(planet) { planet.scouts++; });
-	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE, "Frigate", function(planet) { planet.frigates++; });
-	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY, "Colony Ship", function(planet) { planet.colonyShip++; });
+	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing",     1,    function(planet) { planet.populationRate++; });
+	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY,   "Factory",     1,    function(planet) { planet.industryRate++; });
+	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE,    "Laboratory",  1,    function(planet) { planet.scienceRate++; });
+	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT,      "Scout Ship",  10,   function(planet) { planet.scouts++; });
+	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE,    "Frigate",     100,  function(planet) { planet.frigates++; });
+	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY,     "Colony Ship", 1000, function(planet) { planet.colonyShip++; });
 
 	this.players = new Array();
 	this.players.push(new Player("Player One"));
@@ -181,6 +181,10 @@ function Game(context) {
 			}
 		}
 
+		if (this.selectedPlanet != null) {
+			selectPlanet(this.selectedPlanet);
+		}
+
 	}
 
 
@@ -199,6 +203,8 @@ function Game(context) {
 							return;
 
 						case SCREENS.PLANETS:
+							this.selectedPlanet = null;
+							selectPlanet(null);
 							this.changeScreen(SCREENS.STARS);
 							logThis("Zooming out");
 							return;
@@ -221,18 +227,6 @@ function Game(context) {
 	}
 
 
-	this.Colonize = function() {
-		if (!this.selectedPlanet) {
-			alert("You must select a planet first");
-		}
-
-		this.players[0].colonize(this.selectedPlanet);
-		this.changeProduction(ProductionOptions.POPULATION);
-
-		this.update();
-	}
-
-
 	this.NextTurn = function() {
 		for(var n=0; n < this.gameObjects.length; n++) {
 			var p = this.gameObjects[n];
@@ -245,10 +239,22 @@ function Game(context) {
 	}
 
 
+	this.Colonize = function() {
+		if (!this.selectedPlanet) {
+			alert("You must select a planet first");
+		}
+
+		this.players[0].colonize(this.selectedPlanet);
+		this.ChangeProduction(ProductionOptions.POPULATION);
+
+		this.update();
+	}
+
+
 	this.ChangeProduction = function(index) {
 
-		this.selectedPlanet.productionOption = this.ProductionOptions[index];
-		this.selectedPlanet.productionProgress = 0;
+		logThis("Production changed");
+		this.selectedPlanet.ChangeProduction(this.productionOptions[index]);
 
 	}
 
