@@ -63,13 +63,12 @@ function Planet (name, type, size) {
 
 	this.nextTurn = function() {
 
-		this.population += this.populationRate;
-		this.industryLevel += this.industryRate;
-		this.scienceLevel += this.scienceRate;
+		this.population += this.type.populationBonus;
+		this.industryLevel += this.type.industryBonus;
+		this.scienceLevel += this.type.scienceBonus;
 
 		if (this.population >= this.size.maxPop) {
 			this.population = this.size.maxPop;
-			this.populationRate = 0;
 			logThis(this.star.name + " - " + this.name + " has reached maximum population.");
 		}
 

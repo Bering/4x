@@ -15,23 +15,23 @@ function Game(context) {
 	this.planetTypes = new Array();
 	this.planetTypes[PlanetTypesNames.BAREN]      = new PlanetType("Baren",  0,   0,   0);
 	this.planetTypes[PlanetTypesNames.ARID]       = new PlanetType("Arid",   0,   0,   0);
-	this.planetTypes[PlanetTypesNames.TERRAN]     = new PlanetType("Terran", 1,   1,   1);
-	this.planetTypes[PlanetTypesNames.RICH]       = new PlanetType("Rich",   1,   2,   1);
-	this.planetTypes[PlanetTypesNames.GAIA]       = new PlanetType("Gaïa",   2,   1,   1);
+	this.planetTypes[PlanetTypesNames.TERRAN]     = new PlanetType("Terran", 1,   0,   0);
+	this.planetTypes[PlanetTypesNames.RICH]       = new PlanetType("Rich",   1,   1,   0);
+	this.planetTypes[PlanetTypesNames.GAIA]       = new PlanetType("Gaïa",   2,   2,   0);
 	//this.planetTypes[PlanetTypesNames.ASTEROID] = new PlanetType("Asteroid", 0,   1,   1);
 	//this.planetTypes[PlanetTypesNames.GASGIANT] = new PlanetType("GasGiant", 0,   2,   2);
 
 	this.planetSizes = new Array();
-	this.planetSizes[PlanetSizesNames.TINY]     = new PlanetSize("Tiny",   10);
-	this.planetSizes[PlanetSizesNames.SMALL]    = new PlanetSize("Small",  100);
-	this.planetSizes[PlanetSizesNames.MEDIUM]   = new PlanetSize("Medium", 1000);
-	this.planetSizes[PlanetSizesNames.LARGE]    = new PlanetSize("Large",  10000);
-	this.planetSizes[PlanetSizesNames.HUGE]     = new PlanetSize("Huge",   100000);
+	this.planetSizes[PlanetSizesNames.TINY]   = new PlanetSize("Tiny",   10);
+	this.planetSizes[PlanetSizesNames.SMALL]  = new PlanetSize("Small",  100);
+	this.planetSizes[PlanetSizesNames.MEDIUM] = new PlanetSize("Medium", 1000);
+	this.planetSizes[PlanetSizesNames.LARGE]  = new PlanetSize("Large",  10000);
+	this.planetSizes[PlanetSizesNames.HUGE]   = new PlanetSize("Huge",   100000);
 
 	this.productionOptions = new Array();
-	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing",     1,    function(planet) { planet.populationRate++; });
-	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY,   "Factory",     1,    function(planet) { planet.industryRate++; });
-	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE,    "Laboratory",  1,    function(planet) { planet.scienceRate++; });
+	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing",     1,    function(planet) { planet.population++; });
+	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY,   "Factory",     1,    function(planet) { planet.industryLevel++; });
+	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE,    "Laboratory",  1,    function(planet) { planet.scienceLevel++; });
 	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT,      "Scout Ship",  10,   function(planet) { planet.scouts++; });
 	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE,    "Frigate",     100,  function(planet) { planet.frigates++; });
 	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY,     "Colony Ship", 1000, function(planet) { planet.colonyShip++; });
@@ -134,13 +134,20 @@ function Game(context) {
 	}
 
 
-	this.SetupUI = function(canvas) {
+	this.SetupUI = function(canvas, planetProductionDropdown) {
 		var that = this;
 		canvas.addEventListener('click', function(event) {
 			var x = event.pageX - this.offsetLeft;
 			var y = event.pageY - this.offsetTop;
 			that.clickListener(x, y);
 		});
+
+		for(var n = 1; n < this.productionOptions.length; n++) {
+			var option = document.createElement('option');
+			option.value = this.productionOptions[n].index;
+			option.innerHTML = this.productionOptions[n].name;
+			planetProductionDropdown.appendChild(option);
+		}
 	}
 
 
@@ -248,14 +255,16 @@ function Game(context) {
 		this.ChangeProduction(ProductionOptions.POPULATION);
 
 		this.update();
+
+		logThis(this.players[0].name + " colonized " + this.selectedPlanet.star.name + " - " + this.selectedPlanet.name);
 	}
 
 
 	this.ChangeProduction = function(index) {
 
-		logThis("Production changed");
 		this.selectedPlanet.ChangeProduction(this.productionOptions[index]);
 
+		logThis(this.selectedPlanet.star.name + " - " + this.selectedPlanet.name + " switched production to " + this.productionOptions[index]);
 	}
 
 }
