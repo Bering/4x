@@ -45,12 +45,20 @@
 			}
 
 			function selectPlanet(planet) {
+				if (planet == null) {
+					document.getElementById("planetSelection").style.display = "none";
+					return;
+				}
+
+				document.getElementById("planetSelection").style.display = "block";
 				document.getElementById("planetName").innerHTML = planet.star.name + " - " + planet.name;
 				document.getElementById("planetType").innerHTML = planet.type.name;
 				document.getElementById("planetSize").innerHTML = planet.size.name;
 				document.getElementById("planetPopulation").innerHTML = planet.population + " (+"+ planet.populationRate + ")";
 				document.getElementById("planetIndustry").innerHTML = planet.industryLevel + " (+"+ planet.industryRate + ")";
 				document.getElementById("planetScience").innerHTML = planet.scienceLevel + " (+"+ planet.scienceRate + ")";
+				document.getElementById("productionProgress").innerHTML = planet.productionProgress;
+				document.getElementById("productionCost").innerHTML = planet.productionOption.cost;
 
 				var pp = document.getElementById("planetProduction");
 				if (planet.productionOption == null) {
@@ -66,6 +74,7 @@
 		<style>
 			label { font-weight: bold; display:inline-block; width: 100px; }
 			.left { float: left; }
+			.right { float: right; }
 			#log { width: 320px; height: 100px; font-size: x-small;}
 			#planetSelection { margin-left: 10px; }
 			#controls button { width: 100%; }
@@ -100,10 +109,11 @@
 						<option value="5">Build Frigate</option>
 						<option value="6">Build Colony Ship</option>
 					</select></p>
+					<p><label>Progress:</label> <span id="productionProgress"></span>/<span id="productionCost"></span></p>
+					<button onclick="game.Colonize()">Colonize</button>
 				</div>
 				<div>
-					<button onclick="game.Colonize()">Colonize</button>
-					<button onclick="game.NextTurn();">Next Turn</button>
+					<button class="right" onclick="game.NextTurn();">Next Turn</button>
 				</div>
 			</div>
 		</div>
