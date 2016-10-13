@@ -38,7 +38,7 @@
 				context = canvas.getContext( "2d" );
 
 				game = new Game(context);
-				game.SetupUI(canvas);
+				game.SetupUI(canvas, document.getElementById("planetProduction"));
 
 				// Skip menu
 				game.NewGame();
@@ -54,19 +54,22 @@
 				document.getElementById("planetName").innerHTML = planet.star.name + " - " + planet.name;
 				document.getElementById("planetType").innerHTML = planet.type.name;
 				document.getElementById("planetSize").innerHTML = planet.size.name;
-				document.getElementById("planetPopulation").innerHTML = planet.population + " (+"+ planet.populationRate + ")";
-				document.getElementById("planetIndustry").innerHTML = planet.industryLevel + " (+"+ planet.industryRate + ")";
-				document.getElementById("planetScience").innerHTML = planet.scienceLevel + " (+"+ planet.scienceRate + ")";
-				document.getElementById("productionProgress").innerHTML = planet.productionProgress;
-				document.getElementById("productionCost").innerHTML = planet.productionOption.cost;
+				document.getElementById("planetPopulation").innerHTML = planet.population;
+				document.getElementById("planetIndustry").innerHTML = planet.industryLevel;
+				document.getElementById("planetScience").innerHTML = planet.scienceLevel;
 
-				var pp = document.getElementById("planetProduction");
 				if (planet.productionOption == null) {
-					pp.value = 0;
-					pp.disabled = true;
+					document.getElementById("colonizeButton").style.display = "inline-block";
+					document.getElementById("planetProduction").style.display = "none";
+					document.getElementById("planetProduction").value = 0;
+					document.getElementById("productionProgress").innerHTML = 'n';
+					document.getElementById("productionCost").innerHTML = 'a';
 				} else {
-					pp.value = planet.productionOption.index;
-					pp.disabled = false;
+					document.getElementById("colonizeButton").style.display = "none";
+					document.getElementById("planetProduction").style.display = "inline-block";
+					document.getElementById("planetProduction").value = planet.productionOption.index;
+					document.getElementById("productionProgress").innerHTML = planet.productionProgress;
+					document.getElementById("productionCost").innerHTML = planet.productionOption.cost;
 				}
 			}
 
@@ -76,7 +79,7 @@
 			.left { float: left; }
 			.right { float: right; }
 			#log { width: 320px; height: 100px; font-size: x-small;}
-			#planetSelection { margin-left: 10px; }
+			#planetSelection { margin-left: 10px; display: none; }
 			#controls button { width: 100%; }
 			#controls select { width: 100%; }
 		</style>
@@ -100,17 +103,9 @@
 					<p><label>Population:</label> <span id="planetPopulation"></span></p>
 					<p><label>Industry:</label> <span id="planetIndustry"></span></p>
 					<p><label>Science:</label> <span id="planetScience"></span></p>
-					<p><label>Production:</label> <select id="planetProduction" onchange="game.ChangeProduction(this.value);" disabled>
-						<option value="0">-- Not colonized --</option>
-						<option value="1">Improve Population Rate</option>
-						<option value="2">Improve Industry Rate</option>
-						<option value="3">Improve Science Rate</option>
-						<option value="4">Build Scout</option>
-						<option value="5">Build Frigate</option>
-						<option value="6">Build Colony Ship</option>
-					</select></p>
+					<p><label>Production:</label> <select id="planetProduction" onchange="game.ChangeProduction(this.value);">
+					</select> <button id="colonizeButton" onclick="game.Colonize()">Colonize</button></p>
 					<p><label>Progress:</label> <span id="productionProgress"></span>/<span id="productionCost"></span></p>
-					<button onclick="game.Colonize()">Colonize</button>
 				</div>
 				<div>
 					<button class="right" onclick="game.NextTurn();">Next Turn</button>
