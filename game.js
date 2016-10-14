@@ -264,7 +264,7 @@ function Game(context) {
 
 		this.selectedPlanet.ChangeProduction(this.productionOptions[index]);
 
-		logThis(this.selectedPlanet.star.name + " - " + this.selectedPlanet.name + " switched production to " + this.productionOptions[index]);
+		logThis(this.selectedPlanet.star.name + " - " + this.selectedPlanet.name + " switched production to " + this.productionOptions[index].name);
 	}
 
 }
