@@ -23,11 +23,11 @@ function UISelectedPlanet() {
         drawY += 17;
         context.fillText("Size: " + planet.size.name, this.x, drawY);
         drawY += 17;
-        context.fillText("Population: " + planet.population + " (" + planet.populationRate + ")", this.x, drawY);
+        context.fillText("Population: " + planet.population + " (" + planet.type.populationBonus + ")", this.x, drawY);
         drawY += 17;
-        context.fillText("Industry: " + planet.industryLevel + " (" + planet.industryRate + ")", this.x, drawY);
+        context.fillText("Industry: " + planet.industryLevel + " (" + planet.type.industryBonus + ")", this.x, drawY);
         drawY += 17;
-        context.fillText("Science: " + planet.scienceLevel + " (" + planet.scienceRate + ")", this.x, drawY);
+        context.fillText("Science: " + planet.scienceLevel + " (" + planet.type.scienceBonus + ")", this.x, drawY);
         drawY += 17;
 
 	}

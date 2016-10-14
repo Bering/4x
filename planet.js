@@ -15,11 +15,6 @@ function Planet (name, type, size) {
 	this.industryLevel   = 0;
 	this.scienceLevel    = 0;
 
-	// how much to increment next turn. Represents improvements built.
-	this.populationRate  = 0;
-	this.industryRate    = 0;
-	this.scienceRate     = 0;
-
 	this.productionOption = null;
 	this.productionProgress = 0;
 
