@@ -17,7 +17,7 @@ function Game(context) {
 	this.planetTypes[PlanetTypesNames.ARID]       = new PlanetType("Arid",   0,   0,   0);
 	this.planetTypes[PlanetTypesNames.TERRAN]     = new PlanetType("Terran", 1,   0,   0);
 	this.planetTypes[PlanetTypesNames.RICH]       = new PlanetType("Rich",   1,   1,   0);
-	this.planetTypes[PlanetTypesNames.GAIA]       = new PlanetType("Gaïa",   2,   2,   0);
+	this.planetTypes[PlanetTypesNames.GAIA]       = new PlanetType("Gaïa",   2,   2,   1);
 	//this.planetTypes[PlanetTypesNames.ASTEROID] = new PlanetType("Asteroid", 0,   1,   1);
 	//this.planetTypes[PlanetTypesNames.GASGIANT] = new PlanetType("GasGiant", 0,   2,   2);
 
