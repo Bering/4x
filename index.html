@@ -78,6 +78,8 @@
 			label { font-weight: bold; display:inline-block; width: 100px; }
 			.left { float: left; }
 			.right { float: right; }
+			.clear { clear: both; }
+			#page { width: 640px; margin: auto; border: silver solid 1px; padding: 1em;}
 			#log { width: 320px; height: 100px; font-size: x-small;}
 			#planetSelection { margin-left: 10px; display: none; }
 			#controls button { width: 100%; }
@@ -85,9 +87,10 @@
 		</style>
 	<head>
 	<body>
-		<div>
+		<div id="page">
 			<div id="topBar">
 				Score: <input id="Score" type="number" value="0" readonly />
+				<button class="right" onclick="game.NextTurn();">Next Turn</button>
 			</div>
 			<div class="left">
 				<canvas id="canvas" width="320" height="320" style="border: solid black 1px;"></canvas>
@@ -108,9 +111,9 @@
 					<p><label>Progress:</label> <span id="productionProgress"></span>/<span id="productionCost"></span></p>
 				</div>
 				<div>
-					<button class="right" onclick="game.NextTurn();">Next Turn</button>
 				</div>
 			</div>
+			<div class="clear">&nbsp;</div>
 		</div>
 	</body>
 </html>
