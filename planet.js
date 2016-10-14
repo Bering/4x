@@ -58,6 +58,8 @@ function Planet (name, type, size) {
 
 	this.nextTurn = function() {
 
+		if (this.player == null) return;
+
 		this.population += this.type.populationBonus;
 		this.industryLevel += this.type.industryBonus;
 		this.scienceLevel += this.type.scienceBonus;
