@@ -64,20 +64,26 @@ function Planet (name, type, size) {
 		this.industryLevel += this.type.industryBonus;
 		this.scienceLevel += this.type.scienceBonus;
 
+		if (this.productionOption != null) {
+			this.productionProgress += this.industryLevel;
+			
+			var productCount = 0;
+			
+			while (this.productionProgress >= this.productionOption.cost) {
+				this.productionProgress -= this.productionOption.cost;
+				this.productionOption.effect(this);
+				productCount++;
+			}
+
+			if (productCount > 0) {
+				logThis(this.star.name + " - " + this.name + " finished production of " + productCount + "x " + this.productionOption.name);
+			}
+		}
+
 		if (this.population >= this.size.maxPop) {
 			this.population = this.size.maxPop;
 			logThis(this.star.name + " - " + this.name + " has reached maximum population.");
 		}
-
-		if (this.productionOption != null) {
-			this.productionProgress += this.industryLevel;
-			if (this.productionProgress >= this.productionOption.cost) {
-				this.productionProgress = 0;
-				this.productionOption.effect(this);
-				logThis(this.star.name + " - " + this.name + " finished production of " + this.productionOption.name);
-			}
-		}
-
 	}
 
 

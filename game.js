@@ -29,9 +29,9 @@ function Game(context) {
 	this.planetSizes[PlanetSizesNames.HUGE]   = new PlanetSize("Huge",   100000);
 
 	this.productionOptions = new Array();
-	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing",     1,    function(planet) { planet.population++; });
-	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY,   "Factory",     1,    function(planet) { planet.industryLevel++; });
-	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE,    "Laboratory",  1,    function(planet) { planet.scienceLevel++; });
+	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing",     5,    function(planet) { planet.population++; });
+	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY,   "Factory",     5,    function(planet) { planet.industryLevel++; });
+	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE,    "Laboratory",  5,    function(planet) { planet.scienceLevel++; });
 	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT,      "Scout Ship",  10,   function(planet) { planet.scouts++; });
 	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE,    "Frigate",     100,  function(planet) { planet.frigates++; });
 	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY,     "Colony Ship", 1000, function(planet) { planet.colonyShip++; });
@@ -252,7 +252,7 @@ function Game(context) {
 		}
 
 		logThis(this.players[0].name + " colonized " + this.selectedPlanet.star.name + " - " + this.selectedPlanet.name);
-		
+
 		this.players[0].colonize(this.selectedPlanet);
 		this.ChangeProduction(ProductionOptions.POPULATION);
 
