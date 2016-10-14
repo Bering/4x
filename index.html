@@ -83,7 +83,8 @@
 			.clear { clear: both; }
 			#page { width: 640px; margin: auto; border: silver solid 1px; padding: 1em;  }
 			#topBar { margin-bottom: 14px; }
-			#log { width: 320px; height: 100px; font-size: x-small; }
+			#topBar input { width: 100px; }
+			#log { width: 320px; height: 60px; font-size: x-small; }
 			#planetSelection { margin-left: 10px; display: none; }
 			#planetSelection h2 { margin-top: 0; }
 			#controls button { width: 100%; }
@@ -93,7 +94,10 @@
 	<body>
 		<div id="page">
 			<div id="topBar">
-				Score: <input id="Score" type="number" value="0" readonly />
+				Player name: <input type="text" value="Player One" onkeyup="game.players[0].name=this.value;" />
+				Planets: <span id="planetCount">0</span>
+				Ships: <span id="shipCount">0</span>
+				Score: <span id="Score">0</span>
 				<button class="right" onclick="game.NextTurn();">Next Turn</button>
 			</div>
 			<div class="left">
