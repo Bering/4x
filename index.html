@@ -54,9 +54,9 @@
 				document.getElementById("planetName").innerHTML = planet.star.name + " - " + planet.name;
 				document.getElementById("planetType").innerHTML = planet.type.name;
 				document.getElementById("planetSize").innerHTML = planet.size.name;
-				document.getElementById("planetPopulation").innerHTML = planet.population;
-				document.getElementById("planetIndustry").innerHTML = planet.industryLevel;
-				document.getElementById("planetScience").innerHTML = planet.scienceLevel;
+				document.getElementById("planetPopulation").innerHTML = planet.population + " +(" + planet.type.populationBonus + ")";
+				document.getElementById("planetIndustry").innerHTML = planet.industryLevel + " +(" + planet.type.industryBonus + ")";
+				document.getElementById("planetScience").innerHTML = planet.scienceLevel + " +(" + planet.type.scienceBonus + ")";
 
 				if (planet.productionOption == null) {
 					document.getElementById("colonizeButton").style.display = "inline-block";
