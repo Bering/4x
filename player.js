@@ -9,9 +9,7 @@ function Player(name) {
 		planet.player = this;
 
 		planet.population = 1;
-
-		planet.populationRate = planet.type.populationBonus;
-		planet.industryRate = planet.type.industryBonus;
-		planet.scienceRate = planet.type.scienceBonus;
+		planet.industryLevel = 1;
+		planet.scienceLevel = 0;
 	}
 }
