@@ -251,12 +251,12 @@ function Game(context) {
 			alert("You must select a planet first");
 		}
 
+		logThis(this.players[0].name + " colonized " + this.selectedPlanet.star.name + " - " + this.selectedPlanet.name);
+		
 		this.players[0].colonize(this.selectedPlanet);
 		this.ChangeProduction(ProductionOptions.POPULATION);
 
 		this.update();
-
-		logThis(this.players[0].name + " colonized " + this.selectedPlanet.star.name + " - " + this.selectedPlanet.name);
 	}
 
 
