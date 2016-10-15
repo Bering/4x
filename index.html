@@ -43,13 +43,17 @@
 				// Skip menu
 				game.NewGame();
 			}
-
-			function selectPlanet(planet) {
+/*
+			window.onbeforeunload = function() {
+				return 'Are you sure you want to leave?';
+			};
+*/
+			function uiSelectPlanet(planet) {
 				if (planet == null) {
 					document.getElementById("planetSelection").style.display = "none";
 					return;
 				}
-
+				
 				document.getElementById("planetSelection").style.display = "block";
 				document.getElementById("planetName").innerHTML = planet.star.name + " - " + planet.name;
 				document.getElementById("planetType").innerHTML = planet.type.name;
