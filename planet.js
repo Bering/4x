@@ -23,17 +23,28 @@ function Planet (name, type, size) {
 	this.colonyShips = 0;
 
 
-	this.draw = function(context, screen, selectedStar) {
+	this.draw = function(context, screen, selectedStar, selectedPlanet) {
 		switch(screen) {
 			
 			case SCREENS.PLANETS:
 				if (this.star != selectedStar) return;
+
 				context.drawImage(planetAsset.Image, this.x-8, this.y-8);
+				if (this.player != null) {
+					context.drawImage(ownermarkerAsset.Image, this.x-8, this.y-8);
+				}
+				if (this == selectedPlanet) {
+					context.drawImage(selectionAsset.Image, this.x-8, this.y-8);
+				}
+				if (this.scouts + this.frigates + this.colonyShips > 0) {
+					context.drawImage(shipsAsset.Image, this.x, this.y-8);
+				}
 				if (this.y < 304) {
 					context.fillStyle = "#ffffff";
 					context.textAlign = "center";
 					context.fillText(this.name, this.x, this.y + 17);
 				}
+
 				break;
 		}
 	}

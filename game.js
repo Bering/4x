@@ -184,12 +184,12 @@ function Game(context) {
 
 		for(var n = 0; n < this.gameObjects.length; n++) {
 			if (this.gameObjects[n].draw) {
-				this.gameObjects[n].draw(this.context, this.currentScreen, this.selectedStar);
+				this.gameObjects[n].draw(this.context, this.currentScreen, this.selectedStar, this.selectedPlanet);
 			}
 		}
 
 		if (this.selectedPlanet != null) {
-			selectPlanet(this.selectedPlanet);
+			uiSelectPlanet(this.selectedPlanet);
 		}
 
 	}
@@ -204,14 +204,13 @@ function Game(context) {
 					switch(this.currentScreen) {
 
 						case SCREENS.STARS:
-							this.selectedStar = this.gameObjects[n];
+							this.selectStar(this.gameObjects[n]);
 							this.changeScreen(SCREENS.PLANETS);
 							logThis("Zooming in on " + this.selectedStar.name);
 							return;
 
 						case SCREENS.PLANETS:
-							this.selectedPlanet = null;
-							selectPlanet(null);
+							this.selectPlanet(null);
 							this.changeScreen(SCREENS.STARS);
 							logThis("Zooming out");
 							return;
@@ -222,8 +221,7 @@ function Game(context) {
 				if (this.gameObjects[n] instanceof Planet) {
 					
 					if (this.currentScreen == SCREENS.PLANETS) {
-						this.selectedPlanet = this.gameObjects[n];
-						selectPlanet(this.selectedPlanet);
+						this.selectPlanet(this.gameObjects[n]);
 						return;
 					}
 
@@ -231,6 +229,20 @@ function Game(context) {
 			}
 		}
 
+	}
+
+
+	this.selectStar = function(star) {
+		this.selectedStar = star;
+		this.update();
+	}
+
+
+	this.selectPlanet = function(planet) {
+		this.selectedPlanet = planet;
+		uiSelectPlanet(planet);
+		
+		this.update();		
 	}
 
 
