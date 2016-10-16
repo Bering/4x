@@ -3,16 +3,11 @@ var fleetCount = 0;
 
 function Fleet() {
 
-	this.name = this.generateName();
-	this.x = 0;
-	this.y = 0;
-
-	this.ships = new Array();
-
-
 	this.generateName = function() {
 
-		var name = ++fleetCount;
+		fleetCount++;
+		
+		var name = "" + fleetCount;
 
 		switch (name.slice(-1)) {
 			case '1': name += 'st'; break;
@@ -28,4 +23,12 @@ function Fleet() {
 	this.draw = function() {
 		context.drawImage(fleetAsset.Image, this.x, this.y-8);
 	}
+
+
+	this.name = this.generateName();
+	this.x = 0;
+	this.y = 0;
+
+	this.ships = new Array();
+
 }
