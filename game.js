@@ -70,10 +70,11 @@ function Game(context) {
 		console.log("Created " + nbStars + " stars and " + nbPlanets + " planets.");
 	}
 	this.createRandomStar = function() {
+		// name = A-Z + 1-9 + 1-9 + 1-9. Ex: A123
 		var name = String.fromCharCode(this.rnd(65, 90))+this.rnd(1,9)+this.rnd(1,9)+this.rnd(1,9);
 		var star = new Star(name);
-		star.x = this.rnd(8, 312);
-		star.y = this.rnd(8, 312);
+		star.x = this.rnd(16, 304);
+		star.y = this.rnd(16, 304);
 
 		return star;
 	}
@@ -86,8 +87,8 @@ function Game(context) {
 
 		var planet = new Planet(name, type, size);
 		planet.star = star;
-		planet.x = this.rnd(8, 312);
-		planet.y = this.rnd(8, 312);
+		planet.x = this.rnd(16, 304);
+		planet.y = this.rnd(16, 304);
 		
 		return planet;
 	}

@@ -13,7 +13,7 @@ function Star (name) {
 				context.drawImage(starAsset.Image, this.x - 8, this.y - 8);
 				context.fillStyle = "#ffffff";
 				context.textAlign = "center";
-				if (this.y < 304) context.fillText( this.name, this.x, this.y + 17 );
+				context.fillText( this.name, this.x, this.y + 17 );
 				break;
 
 			case SCREENS.PLANETS:

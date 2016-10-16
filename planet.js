@@ -37,11 +37,10 @@ function Planet (name, type, size) {
 				if (this.ships.length > 0) {
 					context.drawImage(shipsAsset.Image, this.x, this.y-8);
 				}
-				if (this.y < 304) {
-					context.fillStyle = "#ffffff";
-					context.textAlign = "center";
-					context.fillText(this.name, this.x, this.y + 17);
-				}
+
+				context.fillStyle = "#ffffff";
+				context.textAlign = "center";
+				context.fillText(this.name, this.x, this.y + 17);
 
 				break;
 		}
