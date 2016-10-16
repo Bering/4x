@@ -207,13 +207,13 @@ function Game(context) {
 						case SCREENS.STARS:
 							this.selectStar(this.gameObjects[n]);
 							this.changeScreen(SCREENS.PLANETS);
-							logThis("Zooming in on " + this.selectedStar.name);
+							//logThis("Zooming in on " + this.selectedStar.name);
 							return;
 
 						case SCREENS.PLANETS:
 							this.selectPlanet(null);
 							this.changeScreen(SCREENS.STARS);
-							logThis("Zooming out");
+							//logThis("Zooming out");
 							return;
 					}
 				}
