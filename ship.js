@@ -4,11 +4,11 @@ SHIP_TYPE = {
 	FRIGATE : 3,
 	DESTROYER : 4,
 	CRUISER : 5,
-	DREADNOUGHT : 6
+	CARRIER : 6
 }
 
-function Ship(player, type) {
-	this.player = player;
+function Ship(type, planet) {
 	this.type = type;
-	this.techLevel;
+	this.planet = planet;
+	this.techLevel = planet.scienceLevel;
 }

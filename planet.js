@@ -18,9 +18,7 @@ function Planet (name, type, size) {
 	this.productionOption = null;
 	this.productionProgress = 0;
 
-	this.scouts = 0;
-	this.frigates = 0;
-	this.colonyShips = 0;
+	this.ships = new Array();
 
 
 	this.draw = function(context, screen, selectedStar, selectedPlanet) {
@@ -36,7 +34,7 @@ function Planet (name, type, size) {
 				if (this == selectedPlanet) {
 					context.drawImage(selectionAsset.Image, this.x-8, this.y-8);
 				}
-				if (this.scouts + this.frigates + this.colonyShips > 0) {
+				if (this.ships.length > 0) {
 					context.drawImage(shipsAsset.Image, this.x, this.y-8);
 				}
 				if (this.y < 304) {
