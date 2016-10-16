@@ -100,4 +100,10 @@ function Planet (name, type, size) {
 		this.productionProgress = 0;
 	}
 
+
+	this.buildShip = function(shipType) {
+		var ship = new Ship(shipType, this);
+		this.ships.push(ship);
+	}
+
 }

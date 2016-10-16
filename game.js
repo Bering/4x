@@ -32,10 +32,10 @@ function Game(context) {
 	this.productionOptions[ProductionOptions.POPULATION] = new ProductionOption(ProductionOptions.POPULATION, "Housing",     5,    function(planet) { planet.population++; });
 	this.productionOptions[ProductionOptions.INDUSTRY]   = new ProductionOption(ProductionOptions.INDUSTRY,   "Factory",     5,    function(planet) { planet.industryLevel++; });
 	this.productionOptions[ProductionOptions.SCIENCE]    = new ProductionOption(ProductionOptions.SCIENCE,    "Laboratory",  5,    function(planet) { planet.scienceLevel++; });
-	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT,      "Scout Ship",  10,   function(planet) { planet.ships.push(new Ship(SHIP_TYPE.SCOUT, planet)); });
-	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE,    "Frigate",     100,  function(planet) { planet.ships.push(new Ship(SHIP_TYPE.FRIGATE, planet)); });
-	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY,     "Colony Ship", 1000, function(planet) { planet.ships.push(new Ship(SHIP_TYPE.COLONY, planet)); });
-	this.productionOptions[ProductionOptions.DESTROYER]  = new ProductionOption(ProductionOptions.DESTROYER,  "Destroyer"  , 1000, function(planet) { planet.ships.push(new Ship(SHIP_TYPE.DESTROYER, planet)); });
+	this.productionOptions[ProductionOptions.SCOUT]      = new ProductionOption(ProductionOptions.SCOUT,      "Scout Ship",  10,   function(planet) { planet.buildShip(SHIP_TYPE.SCOUT); });
+	this.productionOptions[ProductionOptions.FRIGATE]    = new ProductionOption(ProductionOptions.FRIGATE,    "Frigate",     100,  function(planet) { planet.buildShip(SHIP_TYPE.FRIGATE); });
+	this.productionOptions[ProductionOptions.COLONY]     = new ProductionOption(ProductionOptions.COLONY,     "Colony Ship", 1000, function(planet) { planet.buildShip(SHIP_TYPE.COLONY); });
+	this.productionOptions[ProductionOptions.DESTROYER]  = new ProductionOption(ProductionOptions.DESTROYER,  "Destroyer"  , 1000, function(planet) { planet.buildShip(SHIP_TYPE.DESTROYER); });
 
 	this.players = new Array();
 	this.players.push(new Player("Player One"));

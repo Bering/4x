@@ -9,6 +9,5 @@ SHIP_TYPE = {
 
 function Ship(type, planet) {
 	this.type = type;
-	this.planet = planet;
 	this.techLevel = planet.scienceLevel;
 }
